@@ -1,5 +1,5 @@
 # nvim
-NeoVim config
+NeoVim config based on https://github.com/nvim-lua/kickstart.nvim
 
 # Clean a previous installation
 ```bash
