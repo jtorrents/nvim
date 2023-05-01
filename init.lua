@@ -80,6 +80,9 @@ require('lazy').setup({
     },
   },
 
+  -- support for ruby
+  'vim-ruby/vim-ruby',
+
   { -- colorscheme
     'catppuccin/nvim',
     name = 'catppuccin',
@@ -142,6 +145,16 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+    },
+  },
+
+  { -- Add indentation guides even on blank lines
+    'lukas-reineke/indent-blankline.nvim',
+    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- See `:help indent_blankline.txt`
+    opts = {
+      char = '┊',
+      show_trailing_blankline_indent = false,
     },
   },
 
@@ -302,7 +315,7 @@ vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = 
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'ruby', 'vimdoc', 'vim' },
+  ensure_installed = { 'lua', 'python', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
