@@ -52,7 +52,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -245,6 +245,34 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- " Tabs and spaces
+-- " by default, the indent is 4 spaces.
+-- set tabstop=4
+-- set shiftwidth=4
+-- set softtabstop=4
+-- set expandtab
+--
+-- " for html/css/ruby/erb/js files, 2 spaces
+-- autocmd Filetype html setlocal ts=2 sw=2 sts=2 expandtab
+-- autocmd Filetype css setlocal ts=2 sw=2 sts=2 expandtab
+-- autocmd Filetype ruby setlocal ts=2 sw=2 sts=2 expandtab
+-- autocmd Filetype eruby setlocal ts=2 sw=2 sts=2 expandtab
+-- autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.expandtab = true
+
+-- Filetype-specific options
+vim.cmd([[
+  augroup FiletypeSettings
+    autocmd!
+    autocmd FileType html,css,ruby,eruby setlocal ts=2 sw=2 sts=2 expandtab
+    autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
+  augroup END
+]])
 
 -- [[ Basic Keymaps ]]
 
