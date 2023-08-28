@@ -260,10 +260,13 @@ vim.o.termguicolors = true
 -- autocmd Filetype eruby setlocal ts=2 sw=2 sts=2 expandtab
 -- autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+
+-- default language for spell check
+vim.opt.spelllang = { "en_us" }
 
 -- Filetype-specific options
 vim.cmd([[
@@ -292,6 +295,14 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 -- turn off search highlight
 vim.keymap.set("n", "<leader><space>", "<cmd>nohlsearch<CR>")
+
+-- change spell check language
+vim.keymap.set("n", "<leader>sc", "<cmd>setlocal spell spelllang=ca_es<CR>")
+vim.keymap.set("n", "<leader>se", "<cmd>setlocal spell spelllang=en_us<CR>")
+
+-- navigate between spell mistakes
+vim.keymap.set("n", "<leader>sd", "]s")
+vim.keymap.set("n", "<leader>sa", "[s")
 
 
 -- [[ Highlight on yank ]]
@@ -338,6 +349,7 @@ vim.keymap.set('n', '<leader>fw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind by [G]rep' })
 vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 vim.keymap.set('n', '<leader>fr', require('telescope.builtin').resume, { desc = '[F]ind [R]esume' })
+vim.keymap.set('n', '<leader>ss', require("telescope.builtin").spell_suggest, { desc = '[S]pell [S]uggestions' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -545,6 +557,14 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- Use spelling for markdown and text files.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text" },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
