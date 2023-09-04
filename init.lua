@@ -417,6 +417,11 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+-- Hide diagnostics virtual text by default.
+vim.diagnostic.config({
+  virtual_text = false,
+})
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
