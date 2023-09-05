@@ -297,7 +297,7 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 vim.keymap.set("n", "<leader><space>", "<cmd>nohlsearch<CR>")
 
 -- change spell check language
-vim.keymap.set("n", "<leader>sc", "<cmd>setlocal spell spelllang=ca_es<CR>")
+vim.keymap.set("n", "<leader>sc", "<cmd>setlocal spell spelllang=ca<CR>")
 vim.keymap.set("n", "<leader>se", "<cmd>setlocal spell spelllang=en_us<CR>")
 
 -- navigate between spell mistakes
