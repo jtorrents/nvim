@@ -208,6 +208,28 @@ require('lazy').setup({
     lazy = false,
   },
 
+  -- plugins for text editing
+  --
+  -- pencil
+  {
+    'preservim/vim-pencil',
+    opt = false,
+    config = function()
+      vim.g.tex_conceal = ""
+      vim.g['pencil#conseallevel'] = 0
+      vim.g['pencil#wrapModeDefault'] = 'soft' -- default is 'hard'
+    end,
+  },
+  -- Zen mode
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  },
+
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
@@ -303,6 +325,12 @@ vim.cmd([[
   augroup END
 ]])
 
+-- Fat cursor in insert mode
+vim.opt.guicursor = ""
+
+-- Stop words being broken on wrap
+vim.opt.linebreak = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -329,6 +357,9 @@ vim.keymap.set("n", "<leader>se", "<cmd>setlocal spell spelllang=en_us<CR>")
 -- navigate between spell mistakes
 vim.keymap.set("n", "<leader>sd", "]s")
 vim.keymap.set("n", "<leader>sa", "[s")
+
+-- zen mode
+vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<CR>")
 
 
 -- [[ Highlight on yank ]]
@@ -597,12 +628,17 @@ cmp.setup {
   },
 }
 
--- Use spelling for markdown and text files.
+-- Use spelling, pencili, and ZenMode for markdown and text files.
+local function prose()
+  vim.opt_local.spell = true
+  vim.opt_local.foldlevel = 6
+  vim.cmd("Pencil")
+  -- vim.cmd("ZenMode")
+end
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "text" },
-  callback = function()
-    vim.opt_local.spell = true
-  end,
+  callback = prose,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
