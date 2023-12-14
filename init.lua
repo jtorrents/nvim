@@ -329,7 +329,7 @@ vim.cmd([[
 vim.opt.guicursor = ""
 
 -- Stop words being broken on wrap
-vim.opt.linebreak = true
+-- vim.opt.linebreak = true
 
 -- [[ Basic Keymaps ]]
 
@@ -628,10 +628,11 @@ cmp.setup {
   },
 }
 
--- Use spelling, pencili, and ZenMode for markdown and text files.
+-- Use spelling, pencil, linebreak, and ZenMode for markdown and text files.
 local function prose()
   vim.opt_local.spell = true
   vim.opt_local.foldlevel = 6
+  vim.opt_local.linebreak = true
   vim.cmd("Pencil")
   -- vim.cmd("ZenMode")
 end
