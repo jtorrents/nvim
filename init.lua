@@ -272,6 +272,8 @@ vim.o.breakindent = true
 
 -- Needed for proper ruby indent ??
 vim.opt.cindent = true
+-- vim.opt.autoindent = true
+-- vim.opt.smartindent = true
 
 -- Save undo history
 vim.o.undofile = true
