@@ -219,7 +219,7 @@ require('lazy').setup({
     'preservim/vim-pencil',
     config = function()
       vim.g.tex_conceal = ""
-      vim.g['pencil#conseallevel'] = 0
+      vim.g['pencil#conseallevel'] = 2
       vim.g['pencil#wrapModeDefault'] = 'soft' -- default is 'hard'
     end,
   },
@@ -231,6 +231,33 @@ require('lazy').setup({
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     }
+  },
+  -- Zettelkasten
+  {
+    "zk-org/zk-nvim",
+    config = function()
+      require("zk").setup({
+        -- can be "telescope", "fzf", "fzf_lua" or "select" (`vim.ui.select`)
+        -- it's recommended to use "telescope", "fzf" or "fzf_lua"
+        picker = "telescope",
+
+        lsp = {
+          -- `config` is passed to `vim.lsp.start_client(config)`
+          config = {
+            cmd = { "zk", "lsp" },
+            name = "zk",
+            -- on_attach = ...
+            -- etc, see `:h vim.lsp.start_client()`
+          },
+
+          -- automatically attach buffers in a zk notebook that match the given filetypes
+          auto_attach = {
+            enabled = true,
+            filetypes = { "markdown" },
+          },
+        },
+      })
+    end
   },
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -364,7 +391,23 @@ vim.keymap.set("n", "<leader>sd", "]s")
 vim.keymap.set("n", "<leader>sa", "[s")
 
 -- zen mode
-vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<CR>")
+vim.keymap.set("n", "<leader>m", "<cmd>ZenMode<CR>")
+
+-- Zettelkasten
+local opts = { noremap=true, silent=false }
+
+-- Create a new note after asking for its title.
+vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
+
+-- Open notes.
+vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts)
+-- Open notes associated with the selected tags.
+vim.api.nvim_set_keymap("n", "<leader>zt", "<Cmd>ZkTags<CR>", opts)
+
+-- Search for the notes matching a given query.
+vim.api.nvim_set_keymap("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
+-- Search for the notes matching the current visual selection.
+vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
 
 
 -- [[ Highlight on yank ]]
