@@ -217,7 +217,6 @@ require('lazy').setup({
   -- pencil
   {
     'preservim/vim-pencil',
-    opt = false,
     config = function()
       vim.g.tex_conceal = ""
       vim.g['pencil#conseallevel'] = 0
