@@ -417,7 +417,7 @@ vim.keymap.set('n', '<leader>ss', require("telescope.builtin").spell_suggest, { 
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'lua', 'python', 'ruby', 'vimdoc', 'vim' },
+  ensure_installed = { 'lua', 'markdown', 'markdown_inline', 'python', 'ruby', 'vimdoc', 'vim' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -428,7 +428,14 @@ require('nvim-treesitter.configs').setup {
   -- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
   modules = {},
 
-  highlight = { enable = true },
+  highlight = {
+    enable = true,
+		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+		-- Using this option may slow down your editor, and you may see some duplicate highlights.
+		-- Instead of true it can also be a list of languages
+		additional_vim_regex_highlighting = { 'markdown' },
+  },
   indent = { enable = true, disable = { 'ruby' } },
   endwise = { enable = true },
   incremental_selection = {
