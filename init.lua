@@ -409,6 +409,14 @@ vim.api.nvim_set_keymap("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }
 -- Search for the notes matching the current visual selection.
 vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
 
+-- Do not trigger autocmd when executing macros
+-- makes macros run really fast. Remaps eg '10@q' to :noautocmd normal! '10@q'
+-- https://www.reddit.com/r/neovim/comments/tsol2n/comment/i2ugipm/
+vim.cmd([[
+  xnoremap @ :<C-U>execute "noautocmd '<,'>norm! " . v:count1 . "@" . getcharstr()<cr>
+  nnoremap @ <cmd>execute "noautocmd norm! " . v:count1 . "@" . getcharstr()<cr>
+]])
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
