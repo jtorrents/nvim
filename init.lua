@@ -306,7 +306,7 @@ vim.opt.cindent = true
 -- vim.opt.smartindent = true
 
 -- Save undo history
-vim.o.undofile = true
+vim.opt.undofile = true
 
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
@@ -626,7 +626,7 @@ local servers = {
     },
   },
   pyright = {},
-  solargraph = {},
+  ruby_lsp = {},
 }
 
 -- Setup neovim lua configuration
