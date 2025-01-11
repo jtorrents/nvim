@@ -614,7 +614,6 @@ require('mason-lspconfig').setup()
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
@@ -627,6 +626,7 @@ local servers = {
   },
   pyright = {},
   ruby_lsp = {},
+  gopls = {},
 }
 
 -- Setup neovim lua configuration
