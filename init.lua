@@ -643,6 +643,7 @@ local servers = {
   pyright = {},
   ruby_lsp = {},
   gopls = {},
+  phpactor = {},
 }
 
 -- Ensure the servers above are installed
